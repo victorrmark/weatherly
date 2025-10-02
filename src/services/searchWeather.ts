@@ -62,6 +62,7 @@ export const getWeather = async (coords: Coordinates) => {
   }
 };
 
+
 export const getWeatherByCity = async (city: string) => {
   if (!city) throw new Error("City is required");
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
