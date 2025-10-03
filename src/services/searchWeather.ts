@@ -6,6 +6,7 @@ interface Temp {
     temperature: number;
 }
 
+
 export const getWeather = async (coords: Coordinates) => {
   const { latitude, longitude, city, country } = coords;
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}
@@ -70,9 +71,9 @@ export const getWeatherByCity = async (city: string) => {
   )}&count=1`;
   const res = await axios.get(url);
   if (res.data && res.data.results && res.data.results.length > 0) {
-    const { latitude, longitude, name, country } = res.data.results[0];
+    const { latitude, longitude, city:name, country }:Coordinates = res.data.results[0];
     const weather = await getWeather({ latitude, longitude });
-    return { ...weather, city: name, country };
+    return { ...weather, city:name, country };
   }
 
   throw new Error("City not found");

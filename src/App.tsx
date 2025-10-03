@@ -1,17 +1,13 @@
 // import { useState } from "react";
 import "./App.css";
-
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
-
+import Logo from "./assets/logo.svg";
 
 function App() {
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-red-500">
-        Hello world!
-      </h1>
+      <div >
+        <img src={Logo} alt="Weather Now Logo" />
+      </div>
     </>
   );
 }

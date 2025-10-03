@@ -1,4 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.p-1 {
+  @apply font-dmSans font-semibold italic text-neutral-0 text-8xl;
+}
+.p-2 {
+  @apply font-bricolage font-bold text-[3.25rem];
+}
+.p-3 {
+  @apply font-dmSans font-light text-[2rem];
+}
+.p-4 {
+  @apply font-dmSans font-bold text-[1.75rem];
+}
+.p-5 {
+  @apply font-dmSans font-semibold text-xl;
+}
+.p-6 {
+  @apply font-dmSans font-medium text-lg;
+}
+.p-7 {
+  @apply font-dmSans font-medium text-base;
+}
+.p-8 {
+  @apply font-dmSans font-medium text-sm;
+}
