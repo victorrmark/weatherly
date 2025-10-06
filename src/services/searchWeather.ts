@@ -58,7 +58,7 @@ export const getWeather = async (coords: Coordinates) => {
       }),
     };
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error("API ERROR");
     throw error;
   }
 };
@@ -69,7 +69,10 @@ export const getWeatherByCity = async (city: string) => {
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
     city
   )}&count=1`;
+
+
   const res = await axios.get(url);
+
   if (res.data && res.data.results && res.data.results.length > 0) {
     const { latitude, longitude, city:name, country }:Coordinates = res.data.results[0];
     const weather = await getWeather({ latitude, longitude });

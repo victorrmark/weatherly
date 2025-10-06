@@ -24,6 +24,10 @@ export default {
         "blue-700": "#2B1B9C",
         "blue-500": "#4658D9",
       },
+      backgroundImage: {
+        'image-bg-l': "url('./src/assets/bg-today-large.svg')",
+        'image-bg-s': "url('./src/assets/bg-today-small.svg')",
+      },
     },
   },
   plugins: [],

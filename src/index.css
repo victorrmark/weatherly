@@ -4,27 +4,44 @@
 @tailwind components;
 @tailwind utilities;
 
-.p-1 {
+@layer base {
+  * {
+    @apply leading-none;
+  }
+}
+
+.pre-1 {
   @apply font-dmSans font-semibold italic text-neutral-0 text-8xl;
 }
-.p-2 {
+.pre-2 {
   @apply font-bricolage font-bold text-[3.25rem];
 }
-.p-3 {
+.pre-3 {
   @apply font-dmSans font-light text-[2rem];
 }
-.p-4 {
+.pre-4 {
   @apply font-dmSans font-bold text-[1.75rem];
 }
-.p-5 {
+.pre-5 {
   @apply font-dmSans font-semibold text-xl;
 }
-.p-6 {
+.pre-5-med {
+  @apply font-dmSans font-medium text-xl;
+}
+.pre-6 {
   @apply font-dmSans font-medium text-lg;
 }
 .p-7 {
   @apply font-dmSans font-medium text-base;
 }
-.p-8 {
+.pre-8 {
   @apply font-dmSans font-medium text-sm;
+}
+
+.weather-card {
+  @apply flex flex-col p-5 gap-6 bg-neutral-800 border border-neutral-600 rounded-xl;
+}
+
+.forecast-card {
+  @apply flex flex-col px-2.5 py-4 gap-3 bg-neutral-800 border border-neutral-600 rounded-xl;
 }

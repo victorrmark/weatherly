@@ -28,7 +28,7 @@ export interface Coordinates {
 
 export const getGeoLocation = async (): Promise<Coordinates> => {
   const res = await axios.get("https://ipapi.co/json/");
-  if (res.status !== 200) throw new Error("Failed to fetch IP location");
+  if (res.status !== 200) throw new Error("Problem fetching Location Data. Try Searching for a city");
   const data = res.data;
   return {
     latitude: data.latitude,
