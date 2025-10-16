@@ -8,7 +8,12 @@
   * {
     @apply leading-none;
   }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
 }
+
 
 .pre-1 {
   @apply font-dmSans font-semibold italic text-neutral-0 text-8xl;
@@ -31,7 +36,7 @@
 .pre-6 {
   @apply font-dmSans font-medium text-lg;
 }
-.p-7 {
+.pre-7 {
   @apply font-dmSans font-medium text-base;
 }
 .pre-8 {

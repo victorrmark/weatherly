@@ -17,6 +17,7 @@ export default {
       colors: {
         "neutral-900": "#02012C",
         "neutral-800": "#262540",
+        "neutral-600": "#3C3B5E",
         "neutral-700": "#302F4A",
         "neutral-300": "#ACACB7",
         "neutral-200": "#D4D3D9",
@@ -25,10 +26,10 @@ export default {
         "blue-500": "#4658D9",
       },
       backgroundImage: {
-        'image-bg-l': "url('./src/assets/bg-today-large.svg')",
-        'image-bg-s': "url('./src/assets/bg-today-small.svg')",
+        "image-bg-l": "url('./src/assets/bg-today-large.svg')",
+        "image-bg-s": "url('./src/assets/bg-today-small.svg')",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 };
