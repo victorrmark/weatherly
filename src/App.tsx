@@ -7,21 +7,28 @@ import Search from "./Components/Search";
 import WeatherBox from "./Components/WeatherBox";
 import Error from "./Components/Error";
 import { useWeather } from "./hooks/useWeather";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { Coordinates } from "./utils/geolocation";
 
-// const location = await getCurrentPosition();
 
 function App() {
-  // console.log(location)
-  const [city, setCity] = useState<string | null>(null);
-  const { data: weatherData, isLoading, isError, refetch } = useWeather(city);
-  console.log(weatherData);
+  const [cityCoords, setCityCoords] = useState<Coordinates | null>(null);
+  const { data: weatherData, isLoading, isError, refetch } = useWeather(cityCoords);
+
+  useEffect(() => {
+    if (cityCoords) {
+      console.log(cityCoords);
+    }
+  },[cityCoords]);
+
 
   if (isError) {
     return (
         <Error refetch={refetch} />
     );
   }
+
+  
 
   return (
     <>
@@ -40,7 +47,7 @@ function App() {
       <p className="pre-2 text-neutral-0 my-12 lg:my-16 w-full text-center">
         How's the sky looking today?
       </p>
-      <Search />
+      <Search setCityCoords={setCityCoords} />
       {isLoading && <p className="text-neutral-300 text-center">Loading...</p>}
       <WeatherBox data={weatherData} />
     </>

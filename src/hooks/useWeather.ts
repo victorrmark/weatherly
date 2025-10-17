@@ -1,20 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 // import {useState, useEffect} from "react";
 import { getCurrentPosition } from "../utils/geolocation";
-import { getWeatherByCity, getWeatherByCoords} from "../services/searchWeather";
+import {  getWeatherByCoords} from "../services/searchWeather";
 import type { Coordinates } from "../utils/geolocation";
 
-export const useWeather = (city: string | null) => {
+export const useWeather = (cityCoords: Coordinates | null) => {
 
   return useQuery({
-    queryKey: ["weather", city ?? "current-location"],
+    queryKey: ["weather", cityCoords ?? "current-location"],
     queryFn: async () => {
-      if (city) {
-        return getWeatherByCity(city);
+      if (cityCoords) {
+        return getWeatherByCoords(cityCoords);
       }
-      const coords: Coordinates = await getCurrentPosition();
-      return getWeatherByCoords(coords);
+      const geolocation: Coordinates = await getCurrentPosition();
+      return getWeatherByCoords(geolocation);
     },
+    enabled: !!cityCoords || cityCoords === null,
     staleTime: 1000 * 60 * 10,
     retry: false, 
   });
