@@ -1,6 +1,7 @@
 import sunny from "../assets/icon-sunny.webp";
 import type { WeatherData } from "../services/searchWeather";
 import HoulyForecast from "./HoulyForecast";
+import { useUnitContext } from "../context/UnitContext";
 
 export default function WeatherBox({
   data,
@@ -8,11 +9,13 @@ export default function WeatherBox({
   data: WeatherData | undefined;
 }) {
 
+  const { useMetric } = useUnitContext();
+
 
   return (
     <>
       {data && (
-        <div className="w-full flex flex-col xl:flex-row gap-8">
+        <div className="w-full flex flex-col xl:flex-row gap-8 outline h-full items-stretch">
           <div>
             <div
               className="bg-image-bg-s sm:bg-image-bg-l bg-no-repeat bg-cover h-72 rounded-[1.25rem] 
