@@ -1,11 +1,11 @@
 export function celsiusToFahrenheit(celsius: number): number {
-  return (celsius * 9) / 5 + 32;
+  return Math.trunc((celsius * 9) / 5 + 32);
 }
 
 export function kmhToMph(kmh: number): number {
-  return kmh * 0.621371;
+  return Math.trunc(kmh * 0.621371);
 }
 
 export function mmToInches(mm: number): number {
-  return mm / 25.4;
+  return Math.trunc(mm / 25.4);
 }

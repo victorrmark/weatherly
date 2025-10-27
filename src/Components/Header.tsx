@@ -6,7 +6,7 @@ import { FaCheck } from 'react-icons/fa';
 import { useUnitContext } from "../context/UnitContext";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { useMetric, toggleMetric } = useUnitContext();
 
   const menuRef = useRef<HTMLDivElement | null>(null);

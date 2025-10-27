@@ -1,7 +1,9 @@
-import sunny from "../assets/icon-sunny.webp";
-import type { WeatherData } from "../services/searchWeather";
 import HoulyForecast from "./HoulyForecast";
+import CurrentConditions from "./CurrentConditions";
+import type { WeatherData } from "../services/searchWeather";
 import { useUnitContext } from "../context/UnitContext";
+import { celsiusToFahrenheit } from "../helper/UnitConverters";
+import { getWeatherIcon } from "../utils/getWeatherIcon";
 
 export default function WeatherBox({
   data,
@@ -15,7 +17,7 @@ export default function WeatherBox({
   return (
     <>
       {data && (
-        <div className="w-full flex flex-col xl:flex-row gap-8 outline h-full items-stretch">
+        <div className="w-full flex flex-col xl:flex-row gap-8 h-full items-stretch">
           <div>
             <div
               className="bg-image-bg-s sm:bg-image-bg-l bg-no-repeat bg-cover h-72 rounded-[1.25rem] 
@@ -37,22 +39,30 @@ export default function WeatherBox({
 
               <span className="flex items-center gap-2">
                 <img
-                  src={sunny}
+                  src={getWeatherIcon(data.current.weathercode)}
                   alt="current weather icon"
                   className="object-cover"
                   style={{ width: "95px", height: "auto" }}
                 />
                 <p className="pre-1 text-neutral-0 font-bricolage">
-                  {Math.trunc(data.current.temperature)}°
+                  {useMetric
+                    ? Math.trunc(data.current.temperature)
+                    : celsiusToFahrenheit(data.current.temperature)}
+                  °
                 </p>
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6 mt-5 mb-8 lg:mb-12">
+            <CurrentConditions data={data.current}/>
+
+            {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6 mt-5 mb-8 lg:mb-12">
               <div className="weather-card">
                 <p className="pre-6 text-neutral-200">Feels Like</p>
                 <p className="pre-3 text-neutral-0">
-                  {Math.trunc(data.current.feels_like)}°
+                  {useMetric
+                    ? data.current.feels_like
+                    : celsiusToFahrenheit(data.current.feels_like)}
+                  °
                 </p>
               </div>
               <div className="weather-card">
@@ -64,7 +74,10 @@ export default function WeatherBox({
               <div className="weather-card">
                 <p className="pre-6 text-neutral-200">Wind</p>
                 <p className="pre-3 text-neutral-0">
-                  {Math.trunc(data.current.windspeed)} km/h
+                  {useMetric
+                    ? Math.trunc(data.current.windspeed)
+                    : kmhToMph(data.current.windspeed)}
+                  {useMetric ? " km/h" : " mph"}
                 </p>
               </div>
               <div className="weather-card">
@@ -72,15 +85,18 @@ export default function WeatherBox({
                   Precipitation
                 </p>
                 <p className="pre-3 text-neutral-0">
-                  {Math.trunc(data.current.precipitation)} mm
+                  {useMetric
+                    ? data.current.precipitation
+                    : mmToInches(data.current.precipitation)}
+                  {useMetric ? " mm" : " in"}
                 </p>
               </div>
-            </div>
+            </div> */}
 
-            <div>
+            <div className="mt-8 lg:mb-12">
               <p className="pre-6 text-neutral-200 mb-5">Daily Forcast</p>
 
-              <div className="grid grid-cols-3 sm:grid-cols-7 gap-3.5 sm:gap-5 lg:gap-6 ">
+              <div className="grid grid-cols-3 sm:grid-cols-7 gap-3.5 sm:gap-5 ">
                 {data.daily.map((forecast, index) => {
                   return (
                     <div className="forecast-card" key={index}>
@@ -91,7 +107,7 @@ export default function WeatherBox({
                       </p>
                       <div className="m-auto">
                         <img
-                          src={sunny}
+                          src={getWeatherIcon(forecast.weathercode)}
                           alt="current weather icon"
                           className="object-cover"
                           style={{ width: "70px", height: "auto" }}
@@ -99,10 +115,10 @@ export default function WeatherBox({
                       </div>
                       <span className="flex justify-between">
                         <p className="pre-7 text-neutral-0">
-                          {Math.trunc(forecast.temp_max)}°
+                          {useMetric? Math.trunc(forecast.temp_max):celsiusToFahrenheit(forecast.temp_max)}°
                         </p>
                         <p className="pre-7 text-neutral-0">
-                          {Math.trunc(forecast.temp_min)}°
+                          {useMetric? Math.trunc(forecast.temp_min):celsiusToFahrenheit(forecast.temp_min)}°
                         </p>
                       </span>
                     </div>

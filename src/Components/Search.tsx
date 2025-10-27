@@ -1,4 +1,5 @@
 import SearchIcon from "../assets/icon-search.svg";
+import SpeechToText from "./SpeechToText";
 import { useCitySearch } from "../hooks/useCitySearch";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
@@ -24,12 +25,6 @@ export default function Search({ setCityCoords }: SearchProps) {
   };
 
   const menuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (data && data.length > 0) {
-      console.log(data);
-    }
-  }, [data]);
 
   const searchForCity = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,7 +87,7 @@ export default function Search({ setCityCoords }: SearchProps) {
           Search
         </label>
         <input
-          className="block w-full rounded-xl py-4 pl-14 pr-6 text-neutral-0 pre-5-med
+          className="block w-full rounded-xl py-4 pl-14 pr-20 text-neutral-0 pre-5-med
           placeholder:text-neutral-200 truncate bg-neutral-800 hover:bg-neutral-700"
           placeholder="Search for a place"
           id="search"
@@ -100,10 +95,14 @@ export default function Search({ setCityCoords }: SearchProps) {
           value={queryCity}
         />
 
+        <div></div>
+
+        <SpeechToText setQueryCity={setQueryCity} setIsOpen={setIsOpen} setQuerySearch={setQuerySearch} />
+
         {isOpen && (
           <div
             ref={menuRef}
-            className="absolute top-[60px] rounded-xl p-2 bg-neutral-800 outline outline-2 outline-neutral-700 w-full h-auto max-h-64 overflow-y-auto flex flex-col gap-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="absolute z-50 top-[70px] rounded-xl p-2 bg-neutral-800 outline outline-2 outline-neutral-700 w-full h-auto max-h-64 overflow-y-auto flex flex-col gap-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {isError && (
               <p className="pre-5 text-neutral-0 text-center bg-neutral-700 rounded-lg py-2.5 px-2 ">
@@ -157,6 +156,8 @@ export default function Search({ setCityCoords }: SearchProps) {
           </div>
         </button>
       </div>
+
+      {/* <SpeechToText /> */}
     </form>
   );
 }
