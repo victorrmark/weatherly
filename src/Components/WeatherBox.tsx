@@ -55,44 +55,6 @@ export default function WeatherBox({
 
             <CurrentConditions data={data.current}/>
 
-            {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6 mt-5 mb-8 lg:mb-12">
-              <div className="weather-card">
-                <p className="pre-6 text-neutral-200">Feels Like</p>
-                <p className="pre-3 text-neutral-0">
-                  {useMetric
-                    ? data.current.feels_like
-                    : celsiusToFahrenheit(data.current.feels_like)}
-                  °
-                </p>
-              </div>
-              <div className="weather-card">
-                <p className="pre-6 text-neutral-200">Humidity</p>
-                <p className="pre-3 text-neutral-0">
-                  {Math.trunc(data.current.humidity)}%
-                </p>
-              </div>
-              <div className="weather-card">
-                <p className="pre-6 text-neutral-200">Wind</p>
-                <p className="pre-3 text-neutral-0">
-                  {useMetric
-                    ? Math.trunc(data.current.windspeed)
-                    : kmhToMph(data.current.windspeed)}
-                  {useMetric ? " km/h" : " mph"}
-                </p>
-              </div>
-              <div className="weather-card">
-                <p className="pre-6 text-neutral-200 break-words leading-none">
-                  Precipitation
-                </p>
-                <p className="pre-3 text-neutral-0">
-                  {useMetric
-                    ? data.current.precipitation
-                    : mmToInches(data.current.precipitation)}
-                  {useMetric ? " mm" : " in"}
-                </p>
-              </div>
-            </div> */}
-
             <div className="mt-8 lg:mb-12">
               <p className="pre-6 text-neutral-200 mb-5">Daily Forcast</p>
 

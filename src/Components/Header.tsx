@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaCheck } from 'react-icons/fa';
 import { useUnitContext } from "../context/UnitContext";
 
-export default function Header() {
+export default function Header({isLoading}: {isLoading: boolean}) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { useMetric, toggleMetric } = useUnitContext();
 
@@ -35,6 +35,7 @@ export default function Header() {
           className="py-2 px-2.5 sm:py-3 sm:px-4 pre-8 sm:pre-7 bg-neutral-800 hover:bg-neutral-700 
             text-neutral-0 rounded-md flex items-center gap-1.5 sm:gap-2.5"
             onClick={()=>setIsOpen(!isOpen)}
+            disabled={isLoading}
         >
           <img src={UnitsIcon} alt="Units Icon" />
           Units

@@ -4,7 +4,12 @@ import DropdownIcon from "../assets/icon-dropdown.svg";
 import { TbReload } from "react-icons/tb";
 import { AiOutlineStop } from "react-icons/ai";
 
-export default function Error({ refetch }) {
+interface ErrorProps {
+  refetch: () => void;
+  isRefetching: boolean;
+}
+
+export default function Error({ refetch, isRefetching }: ErrorProps) {
   return (
     <>
       <div className="flex justify-between items-center w-full mb-16">
@@ -30,9 +35,10 @@ export default function Error({ refetch }) {
         <button
           className="pre-7 text-neutral-0 flex items-center gap-2.5 py-3 px-4 bg-neutral-800 rounded-lg hover:bg-neutral-700 "
           onClick={refetch}
+          disabled={isRefetching}
         >
           {" "}
-          <TbReload /> Retry
+          <TbReload /> {  isRefetching ? "Retrying..." : "Retry"}
         </button>
       </div>
     </>
