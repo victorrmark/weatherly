@@ -9,6 +9,8 @@ interface Temp {
 export interface WeatherData {
   city: string;
   country: string;
+  latitude: number;
+  longitude: number;
   current: {
     time: string;
     temperature: number;
@@ -50,6 +52,8 @@ export const getWeatherByCoords = async (
     return {
       city,
       country,
+      latitude: lat,
+      longitude: lon,
       current: {
         time: res.data.current.time,
         temperature: res.data.current.temperature_2m,
