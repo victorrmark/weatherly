@@ -1,12 +1,7 @@
 import axios from "axios";
 import { toast } from "sonner";
+import type {Coordinates} from "../Types/Coordinates";
 
-export interface Coordinates {
-  lat: number;
-  lon: number;
-  city?: string;
-  country?: string;
-}
 
 export const getCurrentPosition = async (): Promise<Coordinates> => {
   const coords = await new Promise<{ lat: number; lon: number }>((resolve, reject) => {

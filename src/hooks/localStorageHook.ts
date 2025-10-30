@@ -1,13 +1,12 @@
-import {useState, useEffect} from 'react'
-import type { Coordinates } from '../utils/geolocation';
+import { useState, useEffect } from "react";
+import type {Coordinates} from "../Types/Coordinates";
 
-export function useStoredState(defaultValue: Coordinates | null, key:string) {
+
+export function useStoredState(defaultValue: Coordinates | null, key: string) {
   const [cityCoords, setCityCoords] = useState(() => {
     const stickyValue = window.localStorage.getItem(key);
 
-    return stickyValue !== null
-      ? JSON.parse(stickyValue)
-      : defaultValue;
+    return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
   });
 
   useEffect(() => {

@@ -6,9 +6,8 @@ import Drizzle from "../assets/icon-drizzle.webp";
 import Rain from "../assets/icon-rain.webp";
 import Snow from "../assets/icon-snow.webp";
 import Storm from "../assets/icon-storm.webp";
-// import Unknown from "../assets/icon-unknown.webp";
 
-export function getWeatherIcon(code: number): string {
+export function getWeatherIcon(code: number) {
   if ([0, 1].includes(code)) return Sunny;
   if (code === 2) return PartlyCloudy;
   if (code === 3) return Overcast;

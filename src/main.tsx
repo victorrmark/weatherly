@@ -5,16 +5,19 @@ import "./index.css";
 import App from "./App.tsx";
 import { Toaster } from "sonner";
 import { UnitProvider } from "./context/UnitContext.tsx";
+import { FavoriteProvider } from "./context/FavoriteContext.tsx";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <UnitProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        <Toaster richColors position="top-right" />
-      </QueryClientProvider>
+      <FavoriteProvider>
+        <QueryClientProvider client={queryClient}>
+          <App />
+          <Toaster richColors position="top-right" />
+        </QueryClientProvider>
+      </FavoriteProvider>
     </UnitProvider>
   </StrictMode>
 );

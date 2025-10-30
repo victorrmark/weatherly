@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 // import {useState, useEffect} from "react";
 import { getCurrentPosition } from "../utils/geolocation";
 import {  getWeatherByCoords} from "../services/searchWeather";
-import type { Coordinates } from "../utils/geolocation";
+import type {Coordinates} from "../Types/Coordinates";
 
 export const useWeather = (cityCoords: Coordinates | null) => {
 

@@ -1,4 +1,4 @@
-import type { Coordinates } from "../utils/geolocation";
+import type {Coordinates} from "../Types/Coordinates";
 import axios from "axios";
 
 interface Temp {
@@ -7,8 +7,8 @@ interface Temp {
 }
 
 export interface WeatherData {
-  city?: string;
-  country?: string;
+  city: string;
+  country: string;
   current: {
     time: string;
     temperature: number;
@@ -93,19 +93,19 @@ export const getWeatherByCoords = async (
   }
 };
 
-export const getWeatherByCity = async (city: string) => {
-  if (!city) throw new Error("City is required");
-  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-    city
-  )}&count=1`;
+// export const getWeatherByCity = async (city: string) => {
+//   if (!city) throw new Error("City is required");
+//   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+//     city
+//   )}&count=1`;
 
-  const res = await axios.get(url);
+//   const res = await axios.get(url);
 
-  if (res.data && res.data.results && res.data.results.length > 0) {
-    const { latitude, longitude, name, country } = res.data.results[0];
-    const weather = await getWeatherByCoords({ lat: latitude, lon: longitude });
-    return { ...weather, city: name, country };
-  }
+//   if (res.data && res.data.results && res.data.results.length > 0) {
+//     const { latitude, longitude, name, country } = res.data.results[0];
+//     const weather = await getWeatherByCoords({ lat: latitude, lon: longitude });
+//     return { ...weather, city: name, country };
+//   }
 
-  throw new Error("City not found");
-};
+//   throw new Error("City not found");
+// };

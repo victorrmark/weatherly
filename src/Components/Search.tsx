@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { FaSpinner } from "react-icons/fa";
 import type { City } from "../Types/CitySearch";
-import type { Coordinates } from "../utils/geolocation";
+import type {Coordinates} from "../Types/Coordinates";
 import { TbCurrentLocation } from "react-icons/tb";
 
 type SearchProps = {
