@@ -53,7 +53,13 @@ export default function HoulyForecast({ data }: { data: Data[] }) {
           onClick={toggleDropdown}
         >
           {formatedDay(selectedDay)}
-          <img src={DropdownIcon} alt="Dropdown Icon" />
+          <img
+            src={DropdownIcon}
+            alt="Dropdown Icon"
+            className={`transition-transform duration-500 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
         </button>
       </div>
 

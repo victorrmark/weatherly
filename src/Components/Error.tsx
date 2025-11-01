@@ -12,19 +12,6 @@ interface ErrorProps {
 export default function Error({ refetch, isRefetching }: ErrorProps) {
   return (
     <>
-      <div className="flex justify-between items-center w-full mb-16">
-        <img src={Logo} alt="Weather Now Logo" />
-
-        <button
-          className="py-2 px-2.5 sm:py-3 sm:px-4 pre-8 sm:pre-7 bg-neutral-800 hover:bg-neutral-700 
-        text-neutral-0 rounded-md flex items-center gap-1.5 sm:gap-2.5"
-        >
-          <img src={UnitsIcon} alt="Units Icon" />
-          Units
-          <img src={DropdownIcon} alt="Dropdown Icon" />
-        </button>
-      </div>
-
       <div className="flex flex-col items-center gap-6">
         <AiOutlineStop className="pre-3 text-neutral-0" />
         <p className="pre-2 text-neutral-0">Something went wrong.</p>

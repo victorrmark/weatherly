@@ -89,13 +89,13 @@ export default function SpeechToText({ setQueryCity, setIsOpen, setQuerySearch }
     <button
       type="button"
       onClick={handleRecognition}
-      className={`absolute inset-y-1.5 right-2.5 flex items-center px-3 py-4 rounded-lg
-        transition-colors duration-200
+      className={`group absolute inset-y-1.5 right-2.5 flex items-center px-3 py-4 rounded-lg
+        transition-colors duration-200 active:scale-95
         ${isRecording ? "bg-red-500" : "bg-gray-200"}`}
     >
       <FaMicrophone
         size={25}
-        className={isRecording ? "text-white" : "text-gray-700"}
+        className={`${isRecording ? "text-white" : "text-gray-700"} group-hover:scale-110 transition-transform duration-200`}
       />
     </button>
   );

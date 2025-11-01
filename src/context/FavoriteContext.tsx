@@ -2,8 +2,9 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
 interface FavoriteContextType {
-  favorites: Array<{ lat:number; lon:number; name: string ; country: string  }>;
-  setFavorites: React.Dispatch<React.SetStateAction<Array<{ lat:number; lon:number; name: string ; country: string }>>>;
+  favorites: Array<{ lat:number; lon:number; city: string ; country: string  }>;
+  setFavorites: React.Dispatch<React.SetStateAction<Array<{ lat:number; lon:number; city: string ; country: string }>>>;
+  clearFavorites: () => void;
 }
 
 const FavoriteContext = createContext<FavoriteContextType | undefined>(undefined);
@@ -21,8 +22,13 @@ export const FavoriteProvider: React.FC<{ children: ReactNode }> = ({
       window.localStorage.setItem("favorite", JSON.stringify(favorites));
     }, [favorites]);
 
+    const clearFavorites = () => {  
+      window.localStorage.removeItem("favorite");
+      setFavorites([]);
+    }
+
   return (
-    <FavoriteContext.Provider value={{ favorites, setFavorites }}>
+    <FavoriteContext.Provider value={{ favorites, setFavorites, clearFavorites }}>
       {children}
     </FavoriteContext.Provider>
   );

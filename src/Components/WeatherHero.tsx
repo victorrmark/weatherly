@@ -6,6 +6,7 @@ import { getWeatherIcon } from "../utils/getWeatherIcon";
 import { useEffect, useState } from "react";
 import { useFavoriteContext } from "../context/FavoriteContext";
 import { isSameLocation } from "../utils/favoritesCheck";
+import { toast } from "sonner";
 
 interface Props {
   country: string;
@@ -23,34 +24,51 @@ export default function WeatherHero({ data }: { data: Props }) {
   const { favorites, setFavorites } = useFavoriteContext();
 
   const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    if (isFavorite) {
+      setIsFavorite(false);
+      toast.info("Removed from favorites!", {
+        description: `${data.city}, ${data.country} has been removed from your favorites.`,
+        duration: 3000,
+      });
+    } else {
+      setIsFavorite(true);
+      toast.success("Added to favorites!", {
+        description: `${data.city}, ${data.country} has been added to your favorites.`,
+        duration: 3000,
+      });
+    }
   };
 
-  console.log(favorites);
   useEffect(() => {
-  if (!data?.city || !data?.country) return;
+    if (!data?.city || !data?.country) return;
 
-  const current = { lat: data.lat, lon: data.lon, name: data.city, country: data.country };
+    const current = {
+      lat: data.lat,
+      lon: data.lon,
+      city: data.city,
+      country: data.country,
+    };
 
-  setFavorites((prev) => {
-    const exists = prev.some((fav) => isSameLocation(fav, current));
+    setFavorites((prev) => {
+      const exists = prev.some((fav) => isSameLocation(fav, current));
 
-    if (isFavorite && !exists) return [...prev, current];
-    if (!isFavorite && exists) return prev.filter((fav) => !isSameLocation(fav, current));
+      if (isFavorite && !exists) return [...prev, current];
 
-    return prev;
-  });
-}, [isFavorite, data]);
+      if (!isFavorite && exists)
+        return prev.filter((fav) => !isSameLocation(fav, current));
 
-useEffect(() => {
-  if (!data?.city || !data?.country) return;
+      return prev;
+    });
+  }, [isFavorite, data]);
 
-  const current = { name: data.city, country: data.country };
-  const exists = favorites.some((fav) => isSameLocation(fav, current));
+  useEffect(() => {
+    if (!data?.city || !data?.country) return;
 
-  setIsFavorite((prev) => (prev === exists ? prev : exists));
-}, [data]);
+    const current = { city: data.city, country: data.country };
+    const exists = favorites.some((fav) => isSameLocation(fav, current));
 
+    setIsFavorite((prev) => (prev === exists ? prev : exists));
+  }, [data]);
 
   return (
     <div

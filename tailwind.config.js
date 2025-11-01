@@ -24,6 +24,8 @@ export default {
         "neutral-0": "#FFFFFF",
         "blue-700": "#2B1B9C",
         "blue-500": "#4658D9",
+        "fave": "#40325C",
+        "fave-hover": "#4C3A6E",
       },
       backgroundImage: {
         "image-bg-l": "url('./src/assets/bg-today-large.svg')",

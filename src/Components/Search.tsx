@@ -5,16 +5,14 @@ import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { FaSpinner } from "react-icons/fa";
 import type { City } from "../Types/CitySearch";
-import type {Coordinates} from "../Types/Coordinates";
 import { TbCurrentLocation } from "react-icons/tb";
+import { useCoordsContext } from "../context/CoordsContext";
 
-type SearchProps = {
-  setCityCoords: (coords: Coordinates | null) => void;
-};
 
 type ChooseCity = Pick<City, "latitude" | "longitude" | "name" | "country">;
 
-export default function Search({ setCityCoords }: SearchProps) {
+export default function Search() {
+  const { setCityCoords } = useCoordsContext();
   const [queryCity, setQueryCity] = useState<string>("");
   const [querySearch, setQuerySearch] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -135,15 +133,15 @@ export default function Search({ setCityCoords }: SearchProps) {
       </div>
 
       <div className="flex gap-2 w-full sm:w-auto">
-        <button className="p-4 pre-5-med text-neutral-0 rounded-xl bg-blue-500 w-full sm:w-auto hover:bg-blue-700">
+        <button className="p-4 pre-5-med text-neutral-0 rounded-xl bg-blue-500 w-full sm:w-auto hover:bg-blue-700 transition-all duration-200 active:scale-95">
           {isLoading ? "Searching..." : "Search"}
         </button>
         <button
-          className="py-4 px-5 rounded-xl bg-blue-500 hover:bg-blue-700 relative group"
+          className="group py-4 px-5 rounded-xl bg-blue-500 hover:bg-blue-700 relative group transition-all duration-200 active:scale-95 "
           onClick={() => setCityCoords(null)}
           type="button"
         >
-          <TbCurrentLocation className="text-neutral-0" size={25} />
+          <TbCurrentLocation className="text-neutral-0 group-hover:scale-110 transition-all duration-200" size={25} />
           <div
             className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
              invisible group-hover:visible opacity-0 group-hover:opacity-100
