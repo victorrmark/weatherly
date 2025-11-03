@@ -3,10 +3,13 @@ import { useFavoriteContext } from "../context/FavoriteContext";
 import { useState, useRef, useEffect } from "react";
 import type { Coordinates } from "../Types/Coordinates";
 import { useCoordsContext } from "../context/CoordsContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function FavoritesDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const location = useLocation();
+  const currentPath = location.pathname === "/favorites";
 
   const { favorites } = useFavoriteContext();
   const { setCityCoords } = useCoordsContext();
@@ -38,6 +41,8 @@ export default function FavoritesDropdown() {
       lon: data.lon,
       city: data.city,
       country: data.country,
+      town: data.town,
+      state: data.state
     });
     setIsOpen(false);
   };
@@ -70,23 +75,28 @@ export default function FavoritesDropdown() {
                 <button
                   key={idx}
                   onClick={() => chooseCity(city)}
-                  className={`w-full rounded py-1.5 px-2 hover:bg-neutral-700 text-left ${
+                  className={`flex flex-col w-full rounded py-1.5 px-2 hover:bg-neutral-700 text-left ${
                     idx !== favorites.length - 1
                       ? "border-b border-neutral-700"
                       : ""
                   }`}
                 >
                   <p className="pre-7 text-neutral-0">
-                    {city.city}, {city.country}
+                    {city.town}, {city.country}
+                  </p>
+                  <p className="pre-8 text-neutral-400">
+                    {city.city}, {city.state}
                   </p>
                 </button>
               ))}
-              <Link to="/favorites">
-                <button className="w-full mt-2 pre-7 py-2 px-2 border-t-2 hover:bg-neutral-600 text-neutral-0 rounded-md"
-                onClick={() => setIsOpen(false)}>
-                  View All Favorites
-                </button>
-              </Link>
+              {!currentPath && (
+                <Link to="/favorites">
+                  <button className="w-full mt-2 pre-7 py-2 px-2 border-t-2 hover:bg-neutral-600 text-neutral-0 rounded-md"
+                  onClick={() => setIsOpen(false)}>
+                    View All Favorites
+                  </button>
+                </Link>
+              )}
             </div>
           )}
         </div>

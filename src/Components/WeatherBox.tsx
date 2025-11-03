@@ -1,19 +1,16 @@
 import HoulyForecast from "./HoulyForecast";
 import CurrentConditions from "./CurrentConditions";
 import WeatherHero from "./WeatherHero";
-import type { WeatherData } from "../services/searchWeather";
 import { useUnitContext } from "../context/UnitContext";
 import { celsiusToFahrenheit } from "../helper/UnitConverters";
 import { getWeatherIcon } from "../utils/getWeatherIcon";
+import { useWeather } from "../hooks/useWeather";
+import { useCoordsContext } from "../context/CoordsContext";
 
-
-export default function WeatherBox({
-  data,
-}: {
-  data: WeatherData | undefined;
-}) {
+export default function WeatherBox() {
   const { useMetric } = useUnitContext();
-  
+  const { cityCoords } = useCoordsContext();
+  const { data } = useWeather(cityCoords);
 
   return (
     <>
@@ -22,6 +19,8 @@ export default function WeatherBox({
           <div>
             <WeatherHero
               data={{
+                town: data.town,
+                state: data.state,
                 city: data.city,
                 country: data.country,
                 lat: data.latitude,
@@ -31,7 +30,7 @@ export default function WeatherBox({
                 weathercode: data.current.weathercode,
               }}
             />
-            
+
             <CurrentConditions data={data.current} />
 
             <div className="mt-8 lg:mb-12">

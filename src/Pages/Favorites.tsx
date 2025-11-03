@@ -1,19 +1,13 @@
 import { useFavoriteContext } from "../context/FavoriteContext";
 import { FaStar } from "react-icons/fa6";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { isSameLocation } from "../utils/favoritesCheck";
-import type { Coordinates } from "../Types/Coordinates";
+import { useState } from "react";
+import FavoriteWeatherView from "../Components/FavoriteWeatherView";
 
 export default function Favorites() {
   const { favorites, setFavorites, clearFavorites } = useFavoriteContext();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const deleteFavorite = (data: Coordinates) => {
-    const clicked = { city: data.city, country: data.country };
-    setFavorites((prev) =>
-      prev.filter((fave) => !isSameLocation(fave, clicked))
-    );
-  };
 
   return (
     <>
@@ -53,27 +47,13 @@ export default function Favorites() {
 
           <div className="flex gap-3 flex-col">
             {favorites.map((city, idx) => (
-              <div
+              <FavoriteWeatherView
                 key={idx}
-                className="py-2 px-6 bg-neutral-800 hover:bg-neutral-700 rounded-xl "
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="pre-5 text-neutral-0 leading-none">
-                      {city.city}, {city.country}
-                    </p>
-                    <p className="pre-7 text-neutral-400 leading-none">
-                      {city.city}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => deleteFavorite(city)}
-                    className="hover:bg-red-400 p-1 rounded-full hover:opacity-50 transition-all duration-200"
-                  >
-                    <RiDeleteBinLine className="text-red-800 text-xl " />
-                  </button>
-                </div>
-              </div>
+                city={ city}
+                isOpen={openIndex === idx}
+                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                setFavorites={setFavorites}
+              />
             ))}
           </div>
         </div>

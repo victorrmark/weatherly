@@ -9,6 +9,8 @@ import { isSameLocation } from "../utils/favoritesCheck";
 import { toast } from "sonner";
 
 interface Props {
+  town?: string;
+  state?: string;
   country: string;
   city: string;
   lat: number;
@@ -27,24 +29,26 @@ export default function WeatherHero({ data }: { data: Props }) {
     if (isFavorite) {
       setIsFavorite(false);
       toast.info("Removed from favorites!", {
-        description: `${data.city}, ${data.country} has been removed from your favorites.`,
+        description: `${data.town}, ${data.country} has been removed from your favorites.`,
         duration: 3000,
       });
     } else {
       setIsFavorite(true);
       toast.success("Added to favorites!", {
-        description: `${data.city}, ${data.country} has been added to your favorites.`,
+        description: `${data.town}, ${data.country} has been added to your favorites.`,
         duration: 3000,
       });
     }
   };
 
   useEffect(() => {
-    if (!data?.city || !data?.country) return;
+    if (!data) return;
 
     const current = {
       lat: data.lat,
       lon: data.lon,
+      town: data.town,
+      state: data.state,
       city: data.city,
       country: data.country,
     };
@@ -62,9 +66,9 @@ export default function WeatherHero({ data }: { data: Props }) {
   }, [isFavorite, data]);
 
   useEffect(() => {
-    if (!data?.city || !data?.country) return;
+    if (!data) return;
 
-    const current = { city: data.city, country: data.country };
+    const current = { lat: data.lat, lon: data.lon };
     const exists = favorites.some((fav) => isSameLocation(fav, current));
 
     setIsFavorite((prev) => (prev === exists ? prev : exists));
@@ -87,7 +91,7 @@ export default function WeatherHero({ data }: { data: Props }) {
       </button>
       <span>
         <p className="pre-4 text-neutral-0 text-center sm:text-left">
-          {data.city}, {data.country}
+          {data.town || data.city}, {data.country}
         </p>
         <p className="pre-6 text-neutral-200 text-center sm:text-left">
           {new Date(data.time).toLocaleDateString("en-US", {

@@ -8,7 +8,6 @@ import Error from "../Components/Error";
 export default function Home() {
   const { cityCoords } = useCoordsContext();
   const {
-    data: weatherData,
     isLoading,
     isError,
     refetch,
@@ -19,6 +18,7 @@ export default function Home() {
     return <Error refetch={refetch} isRefetching={isRefetching} />;
   }
 
+
   return (
     <>
       <p className="pre-2 text-neutral-0 my-12 lg:my-16 w-full text-center">
@@ -26,7 +26,7 @@ export default function Home() {
       </p>
       <Search />
       {isLoading && <LoadingSkeleton />}
-      <WeatherBox data={weatherData} />
+      <WeatherBox />
     </>
   );
 }

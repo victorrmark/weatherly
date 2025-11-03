@@ -42,9 +42,58 @@ export const getCurrentPosition = async (): Promise<Coordinates> => {
     return {
       lat: coords.lat,
       lon: coords.lon,
-      city: data.address.city || data.address.town || data.address.village || data.address.hamlet,
+      town: data.address.city || data.address.town || data.address.village || data.address.hamlet || data.address.county,
+      city: data.address.suburb || data.address.county,
+      state: data.address.state,
       country: data.address.country,
     };
+  }else{
+    toast.error("Problem fetching Location Data. Try Searching for a city", {
+      duration: Infinity,
+      closeButton: true,
+    });
+    throw new Error("Geolocation Error");
+  }
+};
+
+
+export const positionCheck = async () => {
+  const coords = await new Promise<{ lat: number; lon: number }>((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error("Geolocation Error"));
+      toast.error("Geolocation is not supported by your browser", {
+        duration: Infinity,
+        closeButton: true,
+      });
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      },
+      (error) => {
+        reject(new Error("Geolocation Error"));
+        toast.error("Unable to retrieve your location: " + error.message, {
+          duration: Infinity,
+          closeButton: true,
+        });
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 50000,
+        maximumAge: 0,
+      }
+    );
+  });
+
+  const res = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${coords.lat}&lon=${coords.lon}&format=json`);
+  if (res.status === 200) {
+    const data = res.data;
+    return data
   }else{
     toast.error("Problem fetching Location Data. Try Searching for a city", {
       duration: Infinity,

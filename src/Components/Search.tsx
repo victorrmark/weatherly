@@ -9,7 +9,7 @@ import { TbCurrentLocation } from "react-icons/tb";
 import { useCoordsContext } from "../context/CoordsContext";
 
 
-type ChooseCity = Pick<City, "latitude" | "longitude" | "name" | "country">;
+type ChooseCity = Pick<City, "latitude" | "longitude" | "name" | "country" | "admin1" | "admin2">;
 
 export default function Search() {
   const { setCityCoords } = useCoordsContext();
@@ -58,7 +58,9 @@ export default function Search() {
     setCityCoords({
       lat: data.latitude,
       lon: data.longitude,
-      city: data.name,
+      city: data.admin2,
+      town: data.name,
+      state: data.admin1,
       country: data.country,
     });
     setIsOpen(false);
@@ -124,7 +126,7 @@ export default function Search() {
                     {data.name}, {data.country}
                   </p>
                   <p className="pre-8 text-neutral-200">
-                    {data.admin1}, {data.admin2}
+                    {data.admin2}, {data.admin1}
                   </p>
                 </div>
               ))}

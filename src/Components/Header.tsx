@@ -7,6 +7,7 @@ import { useUnitContext } from "../context/UnitContext";
 import FavoritesDropdown from "./FavoritesDropdown";
 import {Link} from "react-router-dom";
 
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { useMetric, toggleMetric } = useUnitContext();

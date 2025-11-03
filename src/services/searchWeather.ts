@@ -7,6 +7,8 @@ interface Temp {
 }
 
 export interface WeatherData {
+  town?: string;
+  state?: string;
   city: string;
   country: string;
   latitude: number;
@@ -36,7 +38,7 @@ export interface WeatherData {
 export const getWeatherByCoords = async (
   coords: Coordinates
 ): Promise<WeatherData> => {
-  const { lat, lon, city, country } = coords;
+  const { lat, lon, town, city, state, country } = coords;
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}
 &current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,windspeed_10m,weathercode
 &hourly=temperature_2m,weathercode
@@ -50,6 +52,8 @@ export const getWeatherByCoords = async (
   try {
     const res = await axios.get(url);
     return {
+      town,
+      state,
       city,
       country,
       latitude: lat,
