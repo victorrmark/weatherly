@@ -21,6 +21,10 @@ export interface WeatherData {
     precipitation: number;
     windspeed: number;
     weathercode: number;
+    visibility: number;
+    pressure: number;
+    cloud_cover: number;
+    uv_index: number;
   };
   daily: Array<{
     date: string;
@@ -40,7 +44,7 @@ export const getWeatherByCoords = async (
 ): Promise<WeatherData> => {
   const { lat, lon, town, city, state, country } = coords;
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}
-&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,windspeed_10m,weathercode
+&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,windspeed_10m,weathercode,visibility,pressure_msl,cloud_cover,uv_index
 &hourly=temperature_2m,weathercode
 &daily=temperature_2m_max,temperature_2m_min,weathercode
 &forecast_days=7
@@ -66,6 +70,10 @@ export const getWeatherByCoords = async (
         precipitation: res.data.current.precipitation,
         windspeed: res.data.current.windspeed_10m,
         weathercode: res.data.current.weathercode,
+        visibility: res.data.current.visibility,
+        pressure: res.data.current.pressure_msl,
+        cloud_cover: res.data.current.cloud_cover,
+        uv_index: res.data.current.uv_index,
       },
       daily: res.data.daily.time.map((date: string, i: number) => {
         const hoursForDay = res.data.hourly.time

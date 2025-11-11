@@ -36,7 +36,7 @@ export default function WeatherBox() {
             <div className="mt-8 lg:mb-12">
               <p className="pre-6 text-neutral-200 mb-5">Daily Forcast</p>
 
-              <div className="grid grid-cols-3 sm:grid-cols-7 gap-3.5 sm:gap-5 ">
+              <div className="grid grid-cols-3 sm:grid-cols-7 gap-3 sm:gap-3.5 ">
                 {data.daily.map((forecast, index) => {
                   return (
                     <div className="forecast-card" key={index}>
@@ -50,7 +50,7 @@ export default function WeatherBox() {
                           src={getWeatherIcon(forecast.weathercode)}
                           alt="current weather icon"
                           className="object-cover"
-                          style={{ width: "70px", height: "auto" }}
+                          style={{ width: "75px", height: "auto" }}
                         />
                       </div>
                       <span className="flex justify-between">

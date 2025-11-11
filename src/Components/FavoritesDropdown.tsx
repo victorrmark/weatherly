@@ -51,13 +51,13 @@ export default function FavoritesDropdown() {
     <div className="relative">
       <button
         ref={buttonRef}
-        className="hidden sm:flex group py-2 px-2.5 sm:py-3 sm:px-4  hover:bg-neutral-700 bg-neutral-600 
+        className="flex group py-2 px-2.5 sm:py-3 sm:px-4  hover:bg-neutral-700 bg-neutral-600 
             text-neutral-0 rounded-md items-center gap-2 transition-all duration-200 active:scale-95"
         onClick={() => setIsOpen(!isOpen)}
       >
         {" "}
         <FaStar className="text-yellow-500 text-xl group-hover:text-yellow-300 group-hover:scale-110" />
-        <p className="pre-7 sm:hidden xl:block">Favorites</p>
+        <p className="pre-7 hidden sm:block">Favorites</p>
       </button>
 
       {isOpen && (
@@ -66,9 +66,19 @@ export default function FavoritesDropdown() {
           className="absolute top-[55px] z-40 right-0 rounded-xl px-2 py-1.5 bg-neutral-800 border border-neutral-700 w-60 h-auto flex flex-col"
         >
           {favorites.length === 0 ? (
-            <p className="pre-7 text-neutral-0 text-center py-2">
-              No favorites added yet
-            </p>
+            <div>
+              <p className="pre-7 text-neutral-0 text-center py-2">
+                No favorites added yet
+              </p>
+              {!currentPath && (
+                <Link to="/favorites">
+                  <button className="w-full mt-2 pre-7 py-2 px-2 border-t-2 hover:bg-neutral-600 text-neutral-0 rounded-md"
+                  onClick={() => setIsOpen(false)}>
+                    Go to Favorites
+                  </button>
+                </Link>
+              )}
+            </div>
           ) : (
             <div>
               {favorites.slice(0, 5).map((city, idx) => (

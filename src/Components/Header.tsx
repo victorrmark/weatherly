@@ -1,4 +1,5 @@
 import Logo from "../assets/logo.svg";
+// import LogoSmall from "../assets/logo2.svg";
 import UnitsIcon from "../assets/icon-units.svg";
 import DropdownIcon from "../assets/icon-dropdown.svg";
 import { useState, useRef, useEffect } from "react";
@@ -35,7 +36,8 @@ export default function Header() {
   return (
     <div className="flex justify-between items-center w-full ">
       <Link to="/">
-        <img src={Logo} alt="Weather Now Logo" className="w-25" />
+        <img src={Logo} alt="Weather Now Logo" className=" w-40 sm:w-56" />
+        {/* <img src={LogoSmall} alt="Weather Now Logo" className="sm:hidden w-12" /> */}
       </Link>
       <div className="flex gap-3 items-center">
         <FavoritesDropdown />
@@ -52,11 +54,11 @@ export default function Header() {
               alt="Units Icon"
               className="transition-transform duration-500 group-hover:rotate-90"
             />
-            Units
+            <p className="hidden sm:block">Units</p>
             <img
               src={DropdownIcon}
               alt="Dropdown Icon"
-              className={`transition-transform duration-500 ${
+              className={`hidden sm:block transition-transform duration-500 ${
                 isOpen ? "rotate-180" : ""
               }`}
             />

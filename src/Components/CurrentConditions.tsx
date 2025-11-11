@@ -14,6 +14,10 @@ interface CurrentConditionsProps {
   precipitation: number;
   windspeed: number;
   weathercode: number;
+  visibility: number;
+  pressure: number;
+  cloud_cover: number;
+  uv_index: number;
 }
 export default function CurrentConditions({
   data,
@@ -38,7 +42,7 @@ export default function CurrentConditions({
           <p className="pre-6 text-neutral-200">Feels Like</p>
           <p className="pre-3 text-neutral-0">
             {useMetric ? Math.trunc(data.feels_like) : celsiusToFahrenheit(data.feels_like)}
-            °
+            °{useMetric ? "C" : "F"}
           </p>
         </div>
         <div className="weather-card">
@@ -77,23 +81,39 @@ export default function CurrentConditions({
             } grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6`}
           >
             <div className="weather-card">
-              <p className="pre-6 text-neutral-200">Wind</p>
+              <p className="pre-6 text-neutral-200 break-words leading-none">Visibility</p>
               <p className="pre-3 text-neutral-0">
                 {useMetric
-                  ? Math.trunc(data.windspeed)
-                  : kmhToMph(data.windspeed)}
-                {useMetric ? " km/h" : " mph"}
+                  ? data.visibility / 1000
+                  : (data.visibility / 1609.34).toFixed(1)}
+                {useMetric ? " km" : " mi"}
               </p>
             </div>
             <div className="weather-card">
               <p className="pre-6 text-neutral-200 break-words leading-none">
-                Precipitation
+                Air Pressure
               </p>
               <p className="pre-3 text-neutral-0">
                 {useMetric
-                  ? data.precipitation
-                  : mmToInches(data.precipitation)}
-                {useMetric ? " mm" : " in"}
+                  ? Math.trunc(data.pressure)
+                  : Math.trunc(data.pressure * 0.02953)}
+                {useMetric ? " hPa" : " inHg"}
+              </p>
+            </div>
+            <div className="weather-card">
+              <p className="pre-6 text-neutral-200 break-words leading-none">
+                Cloud Cover
+              </p>
+              <p className="pre-3 text-neutral-0">
+                {data.cloud_cover} %
+              </p>
+            </div>
+            <div className="weather-card">
+              <p className="pre-6 text-neutral-200 break-words leading-none">
+                UV Index
+              </p>
+              <p className="pre-3 text-neutral-0">
+                {data.uv_index} %
               </p>
             </div>
           </div>

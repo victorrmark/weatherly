@@ -72,14 +72,14 @@ export default function FavoriteWeatherView({
                 {useMetric
                   ? Math.trunc(data.current.temperature)
                   : celsiusToFahrenheit(data.current.temperature)}
-                °
+                °{useMetric ? "C" : "F"}
               </p>
               <p className="pre-7  text-neutral-400 leading-none text-center sm:text-left">
                 Feels like:{" "}
                 {useMetric
                   ? Math.trunc(data.current.feels_like)
                   : celsiusToFahrenheit(data.current.feels_like)}
-                °
+                °{useMetric ? "C" : "F"}
               </p>
             </div>
 
