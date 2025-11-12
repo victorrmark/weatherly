@@ -7,18 +7,17 @@ This is my solution to the [Weather app challenge on Frontend Mentor](https://ww
 
 - [Overview](#overview)
   - [Features](#features)
-
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  
 - [Author](#author)
 
 
 ## Overview
 
 ### Features
-
-Users should be able to:
 
 - Get current weather and forecasts for any location by entering a location in the search bar
 - Automatic location detection
@@ -53,6 +52,11 @@ Users should be able to:
 While building this project, I learned how to:
 - Work with the Open-Meteo API to fetch real-time weather data.
 - Use TanStack Query for the first time to manage API requests and caching efficiently: It simplified data fetching by handling loading, error, and refetch states automatically. I didn't have to write useEffect, useState, and endless loading/error logic manually.
+
+### Continued development
+
+- Work more with Tanstack Query and use it other features in other projects
+- For this project, i would want to add a section where two or more weather information can be compared side by side
 
 
 ## Author
