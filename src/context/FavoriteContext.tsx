@@ -15,7 +15,7 @@ export const FavoriteProvider: React.FC<{ children: ReactNode }> = ({
   const [favorites, setFavorites] = useState(() => {
     const storedValue = window.localStorage.getItem("favorite");
 
-    return  JSON.parse(storedValue) || [];
+    return  storedValue ? JSON.parse(storedValue) : [];
   });
 
     useEffect(() => {
