@@ -11,7 +11,7 @@ This is my solution to the [Weather app challenge on Frontend Mentor](https://ww
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  
+- [Links] (#links)
 - [Author](#author)
 
 
@@ -58,6 +58,8 @@ While building this project, I learned how to:
 - Work more with Tanstack Query and use it other features in other projects
 - For this project, i would want to add a section where two or more weather information can be compared side by side
 
+## Links
+- Live Site - [WeatherNow](https://weather-now-six-lemon.vercel.app/)
 
 ## Author
 
