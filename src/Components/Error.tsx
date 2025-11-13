@@ -1,5 +1,7 @@
 import { TbReload } from "react-icons/tb";
 import { AiOutlineStop } from "react-icons/ai";
+import { FaSpinner } from "react-icons/fa";
+
 
 interface ErrorProps {
   refetch: () => void;
@@ -22,7 +24,8 @@ export default function Error({ refetch, isRefetching }: ErrorProps) {
           disabled={isRefetching}
         >
           {" "}
-          <TbReload /> {  isRefetching ? "Retrying..." : "Retry"}
+          {isRefetching && <p><FaSpinner className="w-5 h-5 animate-spin text-neutral-0" /> Retrying...</p>}
+          <TbReload />  "Retry"
         </button>
       </div>
     </>

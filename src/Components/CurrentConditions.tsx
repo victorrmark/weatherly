@@ -4,6 +4,7 @@ import {
   kmhToMph,
   mmToInches,
 } from "../helper/UnitConverters";
+import { getUVIndex } from "../utils/uvIndex";
 import { useState, useEffect, useRef } from "react";
 
 interface CurrentConditionsProps {
@@ -34,6 +35,7 @@ export default function CurrentConditions({
       setHeight(ref.current.scrollHeight);
     }
   }, [showMore]);
+
 
   return (
     <>
@@ -113,7 +115,7 @@ export default function CurrentConditions({
                 UV Index
               </p>
               <p className="pre-3 text-neutral-0">
-                {data.uv_index} %
+                {getUVIndex(data.uv_index)}
               </p>
             </div>
           </div>

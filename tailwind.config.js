@@ -28,8 +28,8 @@ export default {
         "fave-hover": "#4C3A6E",
       },
       backgroundImage: {
-        "image-bg-l": "url('./src/assets/bg-today-large.svg')",
-        "image-bg-s": "url('./src/assets/bg-today-small.svg')",
+        "image-bg-l": "url('/bg-today-large.svg')",
+        "image-bg-s": "url('/bg-today-small.svg')",
       },
     },
   },
