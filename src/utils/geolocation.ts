@@ -25,7 +25,7 @@ export const getCurrentPosition = async (): Promise<Coordinates> => {
       (error) => {
         toast.error(error.message, {
           description: "Switching to fallback location",
-          duration: 3000,
+          duration: Infinity,
           closeButton: true,
         });
         resolve({ lat: 6.5244, lon: 3.3792 }) //fallback location
