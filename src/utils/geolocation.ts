@@ -4,13 +4,14 @@ import type {Coordinates} from "../Types/Coordinates";
 
 
 export const getCurrentPosition = async (): Promise<Coordinates> => {
-  const coords = await new Promise<{ lat: number; lon: number }>((resolve, reject) => {
+  const coords = await new Promise<{ lat: number; lon: number }>((resolve) => {
     if (!navigator.geolocation) {
-      reject(new Error("Geolocation Error"));
       toast.error("Geolocation is not supported by your browser", {
-        duration: Infinity,
+        description: "switching to fallback location",
+        duration: 3000,
         closeButton: true,
       });
+      resolve({ lat: 6.5244, lon: 3.3792 }) //fallback location
       return;
     }
 
@@ -22,11 +23,12 @@ export const getCurrentPosition = async (): Promise<Coordinates> => {
         });
       },
       (error) => {
-        reject(new Error("Geolocation Error"));
-        toast.error("Unable to retrieve your location: " + error.message, {
-          duration: Infinity,
+        toast.error(error.message, {
+          description: "Switching to fallback location",
+          duration: 3000,
           closeButton: true,
         });
+        resolve({ lat: 6.5244, lon: 3.3792 }) //fallback location
       },
       {
         enableHighAccuracy: true,
@@ -57,51 +59,51 @@ export const getCurrentPosition = async (): Promise<Coordinates> => {
 };
 
 
-export const positionCheck = async () => {
-  const coords = await new Promise<{ lat: number; lon: number }>((resolve, reject) => {
-    if (!navigator.geolocation) {
-      reject(new Error("Geolocation Error"));
-      toast.error("Geolocation is not supported by your browser", {
-        duration: Infinity,
-        closeButton: true,
-      });
-      return;
-    }
+// export const positionCheck = async () => {
+//   const coords = await new Promise<{ lat: number; lon: number }>((resolve, reject) => {
+//     if (!navigator.geolocation) {
+//       reject(new Error("Geolocation Error"));
+//       toast.error("Geolocation is not supported by your browser", {
+//         duration: Infinity,
+//         closeButton: true,
+//       });
+//       return;
+//     }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        resolve({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        });
-      },
-      (error) => {
-        reject(new Error("Geolocation Error"));
-        toast.error("Unable to retrieve your location: " + error.message, {
-          duration: Infinity,
-          closeButton: true,
-        });
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 50000,
-        maximumAge: 0,
-      }
-    );
-  });
+//     navigator.geolocation.getCurrentPosition(
+//       (position) => {
+//         resolve({
+//           lat: position.coords.latitude,
+//           lon: position.coords.longitude,
+//         });
+//       },
+//       (error) => {
+//         reject(new Error("Geolocation Error"));
+//         toast.error("Unable to retrieve your location: " + error.message, {
+//           duration: Infinity,
+//           closeButton: true,
+//         });
+//       },
+//       {
+//         enableHighAccuracy: true,
+//         timeout: 50000,
+//         maximumAge: 0,
+//       }
+//     );
+//   });
 
-  const res = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${coords.lat}&lon=${coords.lon}&format=json`);
-  if (res.status === 200) {
-    const data = res.data;
-    return data
-  }else{
-    toast.error("Problem fetching Location Data. Try Searching for a city", {
-      duration: Infinity,
-      closeButton: true,
-    });
-    throw new Error("Geolocation Error");
-  }
-};
+//   const res = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${coords.lat}&lon=${coords.lon}&format=json`);
+//   if (res.status === 200) {
+//     const data = res.data;
+//     return data
+//   }else{
+//     toast.error("Problem fetching Location Data. Try Searching for a city", {
+//       duration: Infinity,
+//       closeButton: true,
+//     });
+//     throw new Error("Geolocation Error");
+//   }
+// };
 
 // export const getGeoLocation = async (): Promise<Coordinates> => {
 //   const res = await axios.get("https://ipapi.co/json/");
